@@ -10,6 +10,8 @@
     - [Password Store](#password-store)
     - [Puppy Raffle](#puppy-raffle)
     - [T-Swap](#t-swap)
+    - [Thunder Loan](#thunder-loan)
+    - [Boss Bridge](#boss-bridge)
 
 ## Overview
 
@@ -49,4 +51,29 @@ My smart contract security reviews follow a comprehensive methodology, including
   swapping operation. Fees are earned by liquidity providers, who can deposit and withdraw liquidity at
   any time.
 - **Date of Review:** 01/14/2024
+<!-- - **Key Findings:** Summarize the main security findings and recommendations. -->
+
+### [Thunder Loan](2024-01-17-thunder-loan-audit-reports.pdf)
+
+- **Description:** The ThunderLoan protocol is meant to do the following:
+1. Give users a way to create flash loans
+2. Give liquidity providers a way to earn money off their capital
+- **Date of Review:** 01/17/2024
+<!-- - **Key Findings:** Summarize the main security findings and recommendations. -->
+
+### [Boss Bridge](2024-01-18-boss-bridge-audit-reports.pdf)
+
+- **Description:** The Boss Bridge is a bridging mechanism to move an ERC20 token (the “Boss Bridge Token” or “BBT”)
+from L1 to an L2 the development team claims to be building. Because the L2 part of the bridge is
+under construction, it was not included in the reviewed codebase.
+The bridge is intended to allow users to deposit tokens, which are to be held in a vault contract on L1.
+Successful deposits should trigger an event that an off-chain mechanism is in charge of detecting to
+mint the corresponding tokens on the L2 side of the bridge.
+Withdrawals must be approved operators (or “signers”). Essentially they are expected to be one or more
+off-chain services where users request withdrawals, and that should verify requests before signing the
+data users must use to withdraw their tokens. It’s worth highlighting that there’s little-to-no on-chain
+mechanism to verify withdrawals, other than the operator’s signature. So the Boss Bridge heavily relies
+on having robust, reliable and always available operators to approve withdrawals. Any rogue operator
+or compromised signing key may put at risk the entire protocol.
+- **Date of Review:** 01/18/2024
 <!-- - **Key Findings:** Summarize the main security findings and recommendations. -->
